@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="mapsApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Google Maps - Angular Style</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5tm-Iq6iV-_jZAQ5n_BJmzn9Jo6mYnGE">
+    </script>
+  <script type="text/javascript" src="js/cities.js" ></script>
+  <script type="text/javascript" src="js/controller.js"></script>
+
+
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        width: 75%;
+        margin-right: 0;
+        display: inline-block;
+      }
+      .city-info{
+        width: 25%;
+        /*padding-left: 5%;*/
+      }
+      button{
+        height: 30px;
+        background-color: #3ba8ed;
+        color: white;
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+    </style>
+
+
+</head>
+<body ng-controller="mapsController">
+  
+  <div id="map">
+    
+  </div>
+
+    <div class="city-info" ng-repeat="city in cities">
+      {{city.yearRank}}: {{city.city}}
+      <button>
+        <a class="button" href="" ng-click"">Show Info</a>
+      </button>
+    </div>
+ 
+
+    
+</body>
+</html>
