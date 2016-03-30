@@ -8,18 +8,21 @@ mapsApp.controller('mapsController', function ($scope){
           center: new google.maps.LatLng(40.0000, -98.0000)
         });
 
+    var infowindow = new google.maps.InfoWindow;
+	
+    function createMarker (city){
+		    var latLon = city.latLon.split(',');
+		    var lat = latLon[0];
+		    var lon = latLon[1];
+		    var marker = new google.maps.Marker(
+        {
+			     map: $scope.map,
+			     position: new google.maps.LatLng(lat, lon),
+			     title: city.city,
+            animation: google.maps.Animation.DROP,
+		      });
+        
 
-	function createMarker (city){
-		var latLon = city.latLon.split(',');
-		var lat = latLon[0];
-		var lon = latLon[1];
-		var marker = new google.maps.Marker(
-    {
-			map: $scope.map,
-			position: new google.maps.LatLng(lat, lon),
-			title: city.city,
-      animation: google.maps.Animation.DROP,
-		});
 
         var contentString = '<div id="content">'+ '<h1>' + city.city + '</h1>' +
         '<div id="siteNotice">'+
@@ -29,30 +32,87 @@ mapsApp.controller('mapsController', function ($scope){
         '<div id="density">' + 'Population density: ' + city.lastPopDensity + '</div>' +
         '<div id="state">' + 'State: ' + city.state + '</div>' +
         '<div id="land">' + 'Land Area: ' +city.landArea + '</div>' +
+        '<div id="directions"><button ng-click="getDirections()">Directions</button></div>'
             '</div>'+
             '</div>';
 
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-
         marker.addListener('click', function() {
+          infowindow .setContent(contentString);
+          $scope.map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+          //geographical center of the US
+            center: new google.maps.LatLng(lat, lon)
+      })
           infowindow.open($scope.map, marker);
         });
 
         $scope.markers.push(marker);
-	}
+
+      //   $scope.zoomToCity = function(){
+      //     $scope.map = new google.maps.Map(document.getElementById('map'), {
+      //       zoom: 8,
+      //     //geographical center of the US
+      //       center: new google.maps.LatLng(lat, lon)
+      // })
+      // }
+
+	   }
 
 
-  $scope.cityClick = function(i){
-    google.maps.event.trigger($scope.markers[i],'click');
-  }
+      $scope.cityClick = function(i){
+      google.maps.event.trigger($scope.markers[i],'click');
+      }
 
-	$scope.cities = cities;
-	for(i = 0; i< cities.length; i++){
-		createMarker(cities[i])
-	}
+	   $scope.cities = cities;
+	   for(i = 0; i< cities.length; i++){
+		    createMarker(cities[i])
+	   }
 
+     function getDirections(){
+      alert("Give me directions");
+     }
+      // $scope.zoomToCity = function(i){
+      //     $scope.map = new google.maps.Map(document.getElementById('map'), {
+      //       zoom: 8,
+      //     //geographical center of the US
+      //       center: new google.maps.LatLng(lat, lon)
+      // })
+      // }
+
+          var directionsDisplay;
+          var directionsService = new google.maps.DirectionsService();
+          var map;
+          
+
+
+          function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+            var mapOptions = {
+              zoom:7,
+              center: chicago
+            }
+          
+          map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          directionsDisplay.setMap(map);
+          }
+
+          function calcRoute() {
+            var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+            var atlanta = new google.maps.LatLng(33.7629,-84.4227);
+            var request = {
+              origin: atlanta,
+              destination: chicago,
+              travelMode: google.maps.TravelMode.DRIVING
+          };
+
+          directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+            }
+          });
+        
+    }
 });
 
 
