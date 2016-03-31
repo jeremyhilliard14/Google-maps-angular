@@ -23,7 +23,7 @@
   </div>
 
   <div id="map-panel">
-    <ol>
+    <ol id="city-info">
       <li ng-repeat="city in cities track by $index">
         <div class="city-name">{{city.city}}</div>
         <a href="" class="blue-button" ng-click="cityClick($index);">Show Info</a>

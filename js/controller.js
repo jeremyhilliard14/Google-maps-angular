@@ -55,7 +55,7 @@ mapsApp.controller('mapsController', function ($scope){
     }
     
     getDirections = function(lat, lon){
-        document.getElementById('map-panel').classList.add("hidden");
+        document.getElementById('city-info').style.display="none";
         document.getElementById('directions').classList.add("view-height");
         var directionsService = new google.maps.DirectionsService();
         var directionsDisplay = new google.maps.DirectionsRenderer();
