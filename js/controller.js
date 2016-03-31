@@ -36,7 +36,7 @@ mapsApp.controller('mapsController', function ($scope){
         '<div id="state">' + 'State: ' + city.state + '</div>' +
         '<div id="land">' + 'Land Area: ' +city.landArea + '</div>' +
         '<div id="directions"><button onclick="getDirections(' +lat+','+lon+')">Directions</button></div>'+
-        '<div id="search"><button onclick="campgroundSearch(' +lat+','+lon+')">Search</button></div>'+
+        '<div id="search"><button onclick="campgroundSearch(' +lat+ ','+lon+')">Search</button></div>'+
             '</div>'+
             '</div>';
 
@@ -91,8 +91,7 @@ mapsApp.controller('mapsController', function ($scope){
     var infowindow;
 
     campgroundSearch = function(lat, lon){
-        
-            var location = {lat: $scope.markers[i].lat, lng: $scope.markers[i].lon};
+            var location = new google.maps.LatLng(lat, lon);
 
             map = new google.maps.Map(document.getElementById('map'), {
               center: location,
@@ -102,9 +101,9 @@ mapsApp.controller('mapsController', function ($scope){
             infowindow = new google.maps.InfoWindow();
             var service = new google.maps.places.PlacesService(map);
             service.nearbySearch({
-              location: pyrmont,
-              radius: 500,
-              type: ['store']
+              location: location,
+              radius: 50000,
+              type: ['campground']
             }, callback);
         }
 
