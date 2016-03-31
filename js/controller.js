@@ -11,8 +11,9 @@ mapsApp.controller('mapsController', function ($scope){
         });
 
     var infowindow = new google.maps.InfoWindow;
+    
 	
-    function createMarker (city){
+    function cityMarker (city){
 		var latLon = city.latLon.split(',');
 		var lat = latLon[0];
 		var lon = latLon[1];
@@ -34,7 +35,8 @@ mapsApp.controller('mapsController', function ($scope){
         '<div id="density">' + 'Population density: ' + city.lastPopDensity + '</div>' +
         '<div id="state">' + 'State: ' + city.state + '</div>' +
         '<div id="land">' + 'Land Area: ' +city.landArea + '</div>' +
-        '<div id="directions"><button onclick="getDirections(' +lat+','+lon+')">Directions</button></div>'
+        '<div id="directions"><button onclick="getDirections(' +lat+','+lon+')">Directions</button></div>'+
+        '<div id="search"><button onclick="campgroundSearch(' +lat+','+lon+')">Search</button></div>'+
             '</div>'+
             '</div>';
 
@@ -52,11 +54,13 @@ mapsApp.controller('mapsController', function ($scope){
     $scope.zoomCity = function(i){
         $scope.map.setZoom(10);
         $scope.map.panTo({lat: $scope.markers[i].lat, lng: $scope.markers[i].lon});
+        //campgroundSearch();
+        // $scope.marker.setAnimation(google.maps.Animation.BOUNCE);
     }
+
     
     getDirections = function(lat, lon){
         document.getElementById('city-info').style.display="none";
-        document.getElementById('directions').classList.add("view-height");
         var directionsService = new google.maps.DirectionsService();
         var directionsDisplay = new google.maps.DirectionsRenderer();
         var map = new google.maps.Map(document.getElementById('map'),{
@@ -81,8 +85,94 @@ mapsApp.controller('mapsController', function ($scope){
 
     $scope.cities = cities;
 	   for(i = 0; i< cities.length; i++){
-		    createMarker(cities[i])
+		    cityMarker(cities[i])
 	   }
+    var map;
+    var infowindow;
+
+    campgroundSearch = function(lat, lon){
+        
+            var location = {lat: $scope.markers[i].lat, lng: $scope.markers[i].lon};
+
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: location,
+              zoom: 10
+            });
+
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+              location: pyrmont,
+              radius: 500,
+              type: ['store']
+            }, callback);
+        }
+
+          function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              for (var i = 0; i < results.length; i++) {
+                createMarker(results[i]);
+              }
+            }
+          }
+
+          function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var icon = place.icon;
+            console.log(place);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location,
+              icon: icon
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+              infowindow.setContent(place.name);
+              infowindow.open(map, this);
+            });
+          }
+    
+    // campgroundSearch = function(city){
+    //     console.log('dang');
+
+    //     var map = new google.maps.Map(document.getElementById('map'), {
+    //         zoom: 11
+    //     });
+    //     infowindow = new google.maps.InfoWindow();
+    //     var service = new google.maps.places.PlacesService(map);
+    //     var LatLng = ($scope.markers[i].lat, $scope.markers[i].lon);
+    //     service.nearbySearch({
+    //       location: LatLng,
+    //       radius: 50000,
+    //       type: ['campground']
+    //     }, callback);
+      
+
+    //     function callback(results, status) {
+    //         if (status === google.maps.places.PlacesServiceStatus.OK) {
+    //           for (var i = 0; i < results.length; i++) {
+    //             createMarker(results[i]);
+    //           }
+    //         }
+    //     }
+
+    //     function createMarker(place) {
+    //         var placeLoc = place.geometry.location;
+    //         var icon = place.icon;
+    //         console.log(place);
+    //         var marker = new google.maps.Marker({
+    //           map: map,
+    //           position: place.geometry.location,
+    //           icon: icon
+    //     });
+
+    //     google.maps.event.addListener(marker, 'click', function() {
+    //           infowindow.setContent(place.name);
+    //           infowindow.open(map, this);
+    //     });
+    //     }
+    // }
+
 });
      
       
