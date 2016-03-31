@@ -27,10 +27,11 @@
       <li ng-repeat="city in cities track by $index">
         <div class="city-name">{{city.city}}</div>
         <a href="" class="blue-button" ng-click="cityClick($index);">Show Info</a>
-        <a href="" class="zoom-button" ng-click="zoomToCity($index);">Zoom to City</a>
-        <a href="" class="zoom-button" ng-click="calcRoute()">Get Directions</a>
+        <a href="" class="blue-button" ng-click="zoomCity($index);">Zoom to City</a>
       </li>
     </ol>
+
+    <div id="directions"></div>
   </div>
  
 
