@@ -61,7 +61,9 @@ mapsApp.controller('mapsController', function ($scope){
 
     
     getDirections = function(lat, lon){
+        var origin = prompt("What City and State(e.g. Atlanta, GA) are you traveling from?");
         //document.getElementById('city-info').style.display="none";
+        document.getElementById('directions').style.display="inline"
         var directionsService = new google.maps.DirectionsService();
         var directionsDisplay = new google.maps.DirectionsRenderer();
         var map = new google.maps.Map(document.getElementById('map'),{
@@ -72,8 +74,9 @@ mapsApp.controller('mapsController', function ($scope){
         directionsDisplay.setMap(map);
         directionsDisplay.setPanel(document.getElementById('directions'))
 
+        //var origin = document.getElementById('').value
         var request = {
-            origin: "Atlanta, GA",
+            origin: origin,
             destination: new google.maps.LatLng(lat, lon),
             travelMode: google.maps.TravelMode.DRIVING
         };
@@ -134,6 +137,7 @@ mapsApp.controller('mapsController', function ($scope){
     
     reinit = function(){
         console.log("What!?")
+        document.getElementById('directions').style.display='none';
         $scope.map = new google.maps.Map(document.getElementById('map'), 
         {
           zoom: 4,
