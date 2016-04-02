@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="mapsApp">
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Google Maps - Angular Style</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/angular-route.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5tm-Iq6iV-_jZAQ5n_BJmzn9Jo6mYnGE&libraries=places"></script>
   
   <script type="text/javascript" src="js/cities.js" ></script>
@@ -16,12 +19,9 @@
 
 </head>
 <body ng-controller="mapsController">
-  
-  <div id="map">
     
-  </div>
-
-    <div id="map-panel">
+  <div ng-view></div>
+  <div id="map-panel">
         <div id="city-dropdown">
             Select A City: <select id="select-city" ng-model="selectedCity" ng-options="city.city for city in cities">
             </select>
@@ -37,21 +37,7 @@
         <div id="reinit-map">
             <button id="reinit" onclick="reinit();">Reinitialize Map</button>
         </div>
-
-
-
-    <!-- <ol id="city-info">
-      <li ng-repeat="city in cities track by $index">
-        <div class="city-name">{{city.city}}</div>
-        <a href="" class="blue-button" ng-click="cityClick($index);">Show Info</a>
-        <a href="" class="blue-button" ng-click="zoomCity($index);">Zoom to City</a>
-      </li>
-    </ol> -->
-
-        <div id="directions"></div>
   </div>
- 
-
-    
+   
 </body>
 </html>
