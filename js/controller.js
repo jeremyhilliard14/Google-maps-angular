@@ -137,7 +137,7 @@ mapsApp.controller('mapsController', function ($scope){
     
     reinit = function(){
         console.log("What!?")
-        document.getElementById('directions').style.display='none';
+        document.getElementById('directions').innerHTML='';
         $scope.map = new google.maps.Map(document.getElementById('map'), 
         {
           zoom: 4,
