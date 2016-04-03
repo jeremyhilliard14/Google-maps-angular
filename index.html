@@ -11,7 +11,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5tm-Iq6iV-_jZAQ5n_BJmzn9Jo6mYnGE&libraries=places"></script>
   
   <script type="text/javascript" src="js/cities.js" ></script>
-  <script type="text/javascript" src="js/controller.js"></script>
+  <script type="text/javascript" src="js/main-controller.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
@@ -21,23 +21,23 @@
 <body ng-controller="mapsController">
     
   <div ng-view></div>
-  <div id="map-panel">
+  <!-- <div id="map-panel">
         <div id="city-dropdown">
             Select A City: <select id="select-city" ng-model="selectedCity" ng-options="city.city for city in cities">
             </select>
             <button ng-click="zoomCity($index)">Show Info</button>
         </div>
 
-        <!-- <div id="place-dropdown">
+        <div id="place-dropdown">
             <select id="select-place" ng-model="selectedPlace" ng-options="place.displayName for place in places">
             </select>
             <button ng-click="findPlace()">Search</button>
-        </div> -->
+        </div>
 
         <div id="reinit-map">
             <button id="reinit" onclick="reinit();">Reinitialize Map</button>
         </div>
-  </div>
+  </div> -->
    
 </body>
 </html>
