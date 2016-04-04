@@ -37,6 +37,7 @@ mapsApp.controller('mapsController', function ($scope){
         '<div id="land">' + 'Land Area: ' +city.landArea + '</div>' +
         '<div id="directions"><button onclick="getDirections(' +lat+','+lon+')">Directions</button></div>'+
         '<div id="search"><button onclick="campgroundSearch(' +lat+ ','+lon+')">Search</button></div>'+
+        '<div id="weather>weather icon here</div>'
             '</div>'+
             '</div>';
 
