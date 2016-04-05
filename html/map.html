@@ -1,0 +1,14 @@
+<div id="map"></div>
+<div id="map-panel">
+        <div id="city-dropdown">
+            Select a City: <select id="select-city" ng-model="selectedCity" ng-options="city.city for city in cities">
+            </select>
+            <button ng-click="zoomCity($index)">Show Info</button>
+        </div>
+
+        <div id="place-dropdown">
+            Select a Place: <select id="select-place" ng-model="selectedPlace" ng-options="Place.displayName for place in places">
+            </select>
+            <button ng-click="placeSearch()">Search</button>
+        </div>
+</div>
