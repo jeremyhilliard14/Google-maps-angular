@@ -18,7 +18,41 @@
 </head>
 <body ng-controller="mapsController">
   
-  <div ng-view></div>
+  <div id="map">
+    
+  </div>
+
+    <div id="map-panel">
+        <div id="city-dropdown">
+            Select a City: <select id="select-city" ng-model="selectedCity" ng-options="city.city for city in cities">
+            </select>
+            <button ng-click="zoomCity($index)">Show Info</button>
+        </div>
+
+        <!-- <div id="place-dropdown">
+            Select a Place: <select id="select-place" ng-model="selectedPlace" ng-options="place.displayName for place in places">
+              <option value=""></option>
+            </select>
+            <button ng-click="placeSearch()">Search</button>
+        </div> -->
+
+        <div id="reinit-map">
+            <button id="reinit" onclick="reinit();">Reinitialize Map</button>
+        </div>
+
+
+
+    <!-- <ol id="city-info">
+      <li ng-repeat="city in cities track by $index">
+        <div class="city-name">{{city.city}}</div>
+        <a href="" class="blue-button" ng-click="cityClick($index);">Show Info</a>
+        <a href="" class="blue-button" ng-click="zoomCity($index);">Zoom to City</a>
+      </li>
+    </ol> -->
+
+        <div id="directions"></div>
+  </div>
+ 
 
     
 </body>

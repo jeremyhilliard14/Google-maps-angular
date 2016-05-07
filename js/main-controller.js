@@ -14,6 +14,7 @@ mapsApp.config(function($routeProvider){
 
 mapsApp.controller('mapsController', function($scope){
 	$scope.markers = [];
+  $scope.places = places;
     $scope.map = new google.maps.Map(document.getElementById('map'), 
         {
           zoom: 4,
@@ -47,7 +48,7 @@ mapsApp.controller('mapsController', function($scope){
         '<div id="state">' + 'State: ' + city.state + '</div>' +
         '<div id="land">' + 'Land Area: ' +city.landArea + '</div>' +
         '<div id="directions"><button onclick="getDirections(' +lat+','+lon+')">Directions</button></div>'+
-        '<div id="search"><button onclick="campgroundSearch(' +lat+ ','+lon+')">Search</button></div>'+
+        '<div id="search"><button onclick="placeSearch(' +lat+ ','+lon+')">Search</button></div>'+
             '</div>'+
             '</div>';
 
@@ -105,7 +106,7 @@ mapsApp.controller('mapsController', function($scope){
     var map;
     var infowindow;
 
-    campgroundSearch = function(lat, lon){
+    placeSearch = function(lat, lon){
             var location = new google.maps.LatLng(lat, lon);
 
             map = new google.maps.Map(document.getElementById('map'), {
@@ -182,7 +183,7 @@ mapsApp.controller('mapsController', function($scope){
             '<div id="state">' + 'State: ' + city.state + '</div>' +
             '<div id="land">' + 'Land Area: ' +city.landArea + '</div>' +
             '<div id="directions"><button onclick="getDirections(' +lat+','+lon+')">Directions</button></div>'+
-            '<div id="search"><button onclick="campgroundSearch(' +lat+ ','+lon+')">Search</button></div>'+
+            '<div id="search"><button onclick="placeSearch(' +lat+ ','+lon+')">Search</button></div>'+
                 '</div>'+
                 '</div>';
 
