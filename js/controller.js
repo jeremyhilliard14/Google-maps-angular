@@ -123,7 +123,7 @@ mapsApp.controller('mapsController', function ($scope){
           function createMarker(place) {
             var placeLoc = place.geometry.location;
             var icon = place.icon;
-            console.log(place);
+            //console.log(place);
             var marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
@@ -137,7 +137,7 @@ mapsApp.controller('mapsController', function ($scope){
           }
     
     reinit = function(){
-        console.log("What!?")
+        //console.log("What!?")
         document.getElementById('directions').innerHTML='';
         $scope.map = new google.maps.Map(document.getElementById('map'), 
         {
